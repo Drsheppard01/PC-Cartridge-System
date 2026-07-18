@@ -5,6 +5,9 @@
 $TrustDir = Join-Path $env:LOCALAPPDATA "SteamGameCartridge"
 $TrustFile = Join-Path $TrustDir "trusted_scripts.sha256"
 
+$ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
+$RootDir = Split-Path -Parent $ScriptDir
+
 
 Write-Host "Scanning for script on Cartridge..."
 Write-Host ""
@@ -138,3 +141,11 @@ else {
 Write-Host ""
 Write-Host "SHA256:"
 Write-Host $Hash
+
+Write-Host ""
+Write-Host "Going back to menu..."
+Start-Sleep -Seconds 1
+Clear-Host
+
+& "$RootDir\cartridge-windows.ps1"
+exit 0
