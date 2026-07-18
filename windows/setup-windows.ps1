@@ -145,7 +145,7 @@ Write-Host "  launch.ps1"
 
 Write-Host ""
 Write-Host "Trust the script with 'trust-script-windows.ps1'"
-Write-Host "Then insert the cartridge to test."
+Write-Host "Then re-insert the cartridge to test."
 Write-Host ""
 
 Write-Host "Monitor location:"
