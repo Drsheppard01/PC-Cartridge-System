@@ -14,7 +14,7 @@ We are glad it sparked conversations and movements, however contrary to some mis
 * Game ownership
 * Fighting against big corporations
 
-This is Free Open Source project and this repository contains scripts to use with your extra SSDs to launch games on various operating systems and platforms. 
+This is Free Open Source project and this repository contains scripts to use with your extra SSDs (and other storage mediums) to launch games on various operating systems and platforms. 
 
 Please keep that in mind when contributing features.
 
@@ -24,7 +24,7 @@ If you decide on using AI agent for code, consider important rules:
 
 * Make sure you read and understand the output of your AI agent and code it provides you
 * Do not blindly commit AI code without testing it first
-* Please do not use AI write entire code for you - it should be assistance, not developer replacement
+* Please do not use AI to write entire code for you - it should be assistance, not developer replacement
 * Be honest about your AI usage and mention or co-author it in your pull requests
 
 This is a hobby project meant for people, by people, to try and enjoy creating their own creations - it is not a place for testing and improving your AI agents
