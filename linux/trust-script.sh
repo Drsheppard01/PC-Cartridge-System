@@ -5,6 +5,9 @@ set -e
 TRUST_DIR="$HOME/.config/steam-games-cartridges"
 TRUST_FILE="$TRUST_DIR/trusted_scripts.sha256"
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+ROOT_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
+
 echo "Scanning for script on Cartridge..."
 echo ""
 
@@ -74,3 +77,8 @@ case "$CONFIRM" in
         ;;
 
 esac
+
+echo "Going back to Menu..."
+sleep 1
+clear 2>/dev/null || printf "\033c"
+bash "$ROOT_DIR/cartridge-linux.sh"
