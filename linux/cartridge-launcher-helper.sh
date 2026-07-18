@@ -6,6 +6,7 @@ DEVICE="$1"
 
 TRUST_DIR="$HOME/.config/steam-games-cartridges"
 TRUST_FILE="$TRUST_DIR/trusted_scripts.sha256"
+CONFIG_FILE="$TRUST_DIR/settings.conf"
 
 echo "Game cartridge detected: $DEVICE"
 
@@ -41,6 +42,30 @@ SCRIPT="$MOUNT_POINT/launch.sh"
 if [ ! -f "$SCRIPT" ]; then
     echo "No launch.sh found on cartridge"
     exit 0
+fi
+
+# Check auto-launch mode
+if [ -f "$CONFIG_FILE" ]; then
+
+    MODE=$(grep "^MODE=" "$CONFIG_FILE" | cut -d '=' -f2)
+
+    if [ "$MODE" != "running" ]; then
+
+        echo "Cartridge execution is disabled."
+        echo "Current mode: $MODE"
+        echo "Skipping launch."
+
+        exit 0
+
+    fi
+
+else
+
+    echo "No settings file found."
+    echo "Defaulting to blocked mode."
+
+    exit 0
+
 fi
 
 
