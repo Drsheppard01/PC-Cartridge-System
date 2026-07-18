@@ -152,3 +152,5 @@ Write-Host "Monitor location:"
 Write-Host $MonitorTarget
 
 Write-Host ""
+# PAUSE so Users can read the info
+PAUSE
