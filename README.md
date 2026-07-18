@@ -52,6 +52,12 @@ It will scan for any connected storage media for the launch.sh script and ask if
 Any script that hasn't been trusted through this process **will NOT be automatically executed**
 ! If you modify the script later on, you have to re-add it to trusted scripts again.<br>
 
+**Auto-Launch Scripts**<br>
+<img width="428" height="191" alt="image" src="https://github.com/user-attachments/assets/b233100c-f527-442b-87d6-c8746865450f" /><br>
+You can toggle the automatic execution of scripts by choosing this menu point.<br>
+For when you want to change something inside the script and don't want it to auto-launch when you insert the cartridge.<br>
+
+
 **Uninstallation:**<br>
 Select menu point 4) Uninstall <br>
 This will remove everything including the config files and trust scripts list.
@@ -73,6 +79,10 @@ It will scan for any connected storage media for the launch.sh script and ask if
 
 Any script that hasn't been trusted through this process **will NOT be automatically executed**
 ! If you modify the script later on, you have to re-add it to trusted scripts again.<br>
+
+**Auto-Launch Scripts**<br>
+You can toggle the automatic execution of scripts by choosing this menu point.<br>
+For when you want to change something inside the script and don't want it to auto-launch when you insert the cartridge.<br>
 
 **Uninstallation:**<br>
 Select menu point 4) Uninstall <br>

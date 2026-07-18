@@ -14,7 +14,7 @@ Write-Host ""
 
 $InstallFolder = Join-Path $env:LOCALAPPDATA "SteamGameCartridge"
 
-$MonitorSource = Join-Path $PSScriptRoot "windows\cartridge-monitoring.ps1"
+$MonitorSource = Join-Path $PSScriptRoot "cartridge-monitoring.ps1"
 
 $MonitorTarget = Join-Path $InstallFolder "cartridge-monitoring.ps1"
 

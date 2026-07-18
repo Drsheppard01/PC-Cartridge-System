@@ -1,92 +1,206 @@
 ﻿$ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 
-# Colors
-$Cyan = "Cyan"
 
-Clear-Host
+# Config
+$ConfigDir = Join-Path $env:LOCALAPPDATA "SteamGameCartridge"
+$ConfigFile = Join-Path $ConfigDir "settings.conf"
 
-Write-Host @"
+
+if (-not (Test-Path $ConfigDir)) {
+    New-Item -ItemType Directory -Path $ConfigDir -Force | Out-Null
+}
+
+
+if (-not (Test-Path $ConfigFile)) {
+    "MODE=running" | Out-File $ConfigFile -Encoding UTF8
+}
+
+
+
+function Get-Mode {
+
+    $ModeLine = Get-Content $ConfigFile | Where-Object { $_ -like "MODE=*" }
+
+    if ($ModeLine) {
+
+        $Mode = $ModeLine.Split("=")[1]
+
+        if ($Mode -eq "stopped") {
+            return "stopped"
+        }
+
+    }
+
+    return "running"
+}
+
+
+
+function Toggle-Mode {
+
+    $CurrentMode = Get-Mode
+
+
+    if ($CurrentMode -eq "running") {
+
+        "MODE=stopped" | Out-File $ConfigFile -Encoding UTF8
+
+    }
+
+    else {
+
+        "MODE=running" | Out-File $ConfigFile -Encoding UTF8
+
+    }
+
+}
+
+
+
+function Show-Menu {
+
+
+    $Mode = Get-Mode
+
+
+    if ($Mode -eq "running") {
+
+        $ModeText = "Yes"
+
+        $ModeColor = "Green"
+
+    }
+
+    else {
+
+        $ModeText = "No "
+
+        $ModeColor = "Red"
+
+    }
+
+
+
+    Clear-Host
+
+
+    Write-Host @"
    ██████╗ █████╗ ██████╗ ████████╗██████╗ ██╗██████╗  ██████╗ ███████╗███████╗
   ██╔════╝██╔══██╗██╔══██╗╚══██╔══╝██╔══██╗██║██╔══██╗██╔════╝ ██╔════╝██╔════╝
   ██║     ███████║██████╔╝   ██║   ██████╔╝██║██║  ██║██║  ███╗█████╗  ███████╗
   ██║     ██╔══██║██╔══██╗   ██║   ██╔══██╗██║██║  ██║██║   ██║██╔══╝  ╚════██║
   ╚██████╗██║  ██║██║  ██║   ██║   ██║  ██║██║██████╔╝╚██████╔╝███████╗███████║
    ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝╚═╝╚═════╝  ╚═════╝ ╚══════╝╚══════╝
-"@ -ForegroundColor $Cyan
+"@ -ForegroundColor Cyan
 
 
-Write-Host ""
-Write-Host "        ╭────────────────────────────────────────╮"
-Write-Host "        │      Menu                              │"
-Write-Host "        ├────────────────────────────────────────┤"
-Write-Host "        │   1) Install                           │"
-Write-Host "        │   2) Trust Scripts                     │"
-Write-Host "        │   3) Mode                              │"
-Write-Host "        │   4) Uninstall                         │"
-Write-Host "        │   5) Exit                              │"
-Write-Host "        ╰────────────────────────────────────────╯"
-Write-Host ""
+    Write-Host ""
+    Write-Host "        ╭────────────────────────────────────────╮"
+    Write-Host "        │      Menu                              │"
+    Write-Host "        ├────────────────────────────────────────┤"
+    Write-Host "        │   1) Install                           │"
+    Write-Host "        │   2) Trust Scripts                     │"
+
+    Write-Host -NoNewline "        │   3) Auto-Launch scripts: "
+
+    Write-Host -NoNewline $ModeText -ForegroundColor $ModeColor
+
+    Write-Host "          │"
+
+    Write-Host "        │   4) Uninstall                         │"
+    Write-Host "        │   5) Exit                              │"
+    Write-Host "        ╰────────────────────────────────────────╯"
+    Write-Host ""
+
+}
 
 
-$Option = Read-Host "     Select option"
+
+while ($true) {
 
 
-switch ($Option) {
+    Show-Menu
 
-    "1" {
 
-        Clear-Host
-        Write-Host "Starting installation..."
+    $Option = Read-Host "     Select option"
 
-        Start-Process `
+
+    switch ($Option) {
+
+
+        "1" {
+
+            Clear-Host
+
+            Write-Host "Starting installation..."
+
+
+            Start-Process `
+                powershell.exe `
+                -Verb RunAs `
+                -ArgumentList "-ExecutionPolicy Bypass -File `"$ScriptDir\windows\install.ps1`"" `
+                -Wait
+        }
+
+
+
+        "2" {
+
+            Clear-Host
+
+            Write-Host "Starting trust process..."
+
+
             powershell.exe `
-            -Verb RunAs `
-            -ArgumentList "-ExecutionPolicy Bypass -File `"$ScriptDir\windows\install.ps1`"" `
-            -Wait
+                -ExecutionPolicy Bypass `
+                -File "$ScriptDir\windows\trust-script.ps1"
+
+
+            Pause
+        }
+
+
+
+        "3" {
+
+            Toggle-Mode
+
+        }
+
+
+
+        "4" {
+
+            Clear-Host
+
+            Write-Host "Starting uninstall..."
+
+
+            Start-Process `
+                powershell.exe `
+                -Verb RunAs `
+                -ArgumentList "-ExecutionPolicy Bypass -File `"$ScriptDir\windows\uninstall.ps1`"" `
+                -Wait
+        }
+
+
+
+        "5" {
+
+            Clear-Host
+
+            exit
+        }
+
+
+
+        default {
+
+            Write-Host "Invalid option."
+
+            Start-Sleep -Seconds 1
+        }
+
     }
 
-
-    "2" {
-
-        Clear-Host
-        Write-Host "Starting trust process..."
-
-        powershell.exe `
-            -ExecutionPolicy Bypass `
-            -File "$ScriptDir\windows\trust-script.ps1"
-    }
-
-
-    "3" {
-
-        Write-Host "Mode selection coming soon..."
-    }
-
-
-    "4" {
-
-        Clear-Host
-        Write-Host "Starting uninstall..."
-
-        Start-Process `
-            powershell.exe `
-            -Verb RunAs `
-            -ArgumentList "-ExecutionPolicy Bypass -File `"$ScriptDir\windows\uninstall.ps1`"" `
-            -Wait
-    }
-
-
-    "5" {
-
-        Write-Host "Exiting..."
-        Start-Sleep -Seconds 1
-        Clear-Host
-        exit
-    }
-
-
-    default {
-
-        Write-Host "Invalid option."
-    }
 }

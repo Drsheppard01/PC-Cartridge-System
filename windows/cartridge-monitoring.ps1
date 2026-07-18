@@ -6,6 +6,8 @@ $InstallFolder = Join-Path $env:LOCALAPPDATA "SteamGameCartridge"
 $LogFile = Join-Path $InstallFolder "monitor.log"
 $TrustFile = Join-Path $InstallFolder "trusted_scripts.sha256"
 
+$ConfigFile = Join-Path $InstallFolder "settings.conf"
+
 $DebounceSeconds = 5
 
 
@@ -15,6 +17,10 @@ if (-not (Test-Path $InstallFolder)) {
 
 if (-not (Test-Path $TrustFile)) {
     New-Item -ItemType File -Path $TrustFile -Force | Out-Null
+}
+
+if (-not (Test-Path $ConfigFile)) {
+    "MODE=running" | Out-File $ConfigFile -Encoding UTF8
 }
 
 
@@ -57,6 +63,29 @@ function Is-TrustedScript {
     $TrustedHashes = Get-Content $TrustFile
 
     return $TrustedHashes -contains $Hash
+}
+
+function Get-Mode {
+
+    if (-not (Test-Path $ConfigFile)) {
+        return "stopped"
+    }
+
+
+    $ModeLine = Get-Content $ConfigFile |
+        Where-Object { $_ -like "MODE=*" }
+
+
+    if ($ModeLine) {
+
+        $Mode = $ModeLine.Split("=")[1]
+
+        return $Mode.ToLower()
+
+    }
+
+
+    return "stopped"
 }
 
 
@@ -115,6 +144,16 @@ Register-WmiEvent `
 
 
         Write-Log "Cartridge detected: $drive"
+
+        $Mode = Get-Mode
+
+
+        if ($Mode -ne "running") {
+
+            Write-Log "Cartridge execution disabled. Current mode: $Mode"
+
+            return
+        }
 
 
         try {
