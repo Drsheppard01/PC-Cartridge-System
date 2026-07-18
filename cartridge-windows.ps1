@@ -22,75 +22,47 @@ function Get-Mode {
     $ModeLine = Get-Content $ConfigFile | Where-Object { $_ -like "MODE=*" }
 
     if ($ModeLine) {
-
         $Mode = $ModeLine.Split("=")[1]
-
         if ($Mode -eq "stopped") {
             return "stopped"
         }
-
     }
-
     return "running"
 }
 
 
 
 function Toggle-Mode {
-
     $CurrentMode = Get-Mode
-
-
     if ($CurrentMode -eq "running") {
-
         "MODE=stopped" | Out-File $ConfigFile -Encoding UTF8
-
     }
-
     else {
-
         "MODE=running" | Out-File $ConfigFile -Encoding UTF8
-
     }
-
 }
 
-
-
 function Show-Menu {
-
-
     $Mode = Get-Mode
-
-
     if ($Mode -eq "running") {
-
         $ModeText = "Yes"
-
         $ModeColor = "Green"
-
     }
-
     else {
-
         $ModeText = "No "
-
         $ModeColor = "Red"
-
     }
-
-
 
     Clear-Host
 
-
+    Write-Host ""
     Write-Host @"
-   ██████╗ █████╗ ██████╗ ████████╗██████╗ ██╗██████╗  ██████╗ ███████╗███████╗
-  ██╔════╝██╔══██╗██╔══██╗╚══██╔══╝██╔══██╗██║██╔══██╗██╔════╝ ██╔════╝██╔════╝
-  ██║     ███████║██████╔╝   ██║   ██████╔╝██║██║  ██║██║  ███╗█████╗  ███████╗
-  ██║     ██╔══██║██╔══██╗   ██║   ██╔══██╗██║██║  ██║██║   ██║██╔══╝  ╚════██║
-  ╚██████╗██║  ██║██║  ██║   ██║   ██║  ██║██║██████╔╝╚██████╔╝███████╗███████║
-   ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝╚═╝╚═════╝  ╚═════╝ ╚══════╝╚══════╝
+    ██████╗ █████╗ ██████╗ ████████╗██████╗ ██╗██████╗  ██████╗ ███████╗███████╗
+   ██╔════╝██╔══██╗██╔══██╗╚══██╔══╝██╔══██╗██║██╔══██╗██╔════╝ ██╔════╝██╔════╝
+   ██║     ███████║██████╔╝   ██║   ██████╔╝██║██║  ██║██║  ███╗█████╗  ███████╗
+   ██║     ██╔══██║██╔══██╗   ██║   ██╔══██╗██║██║  ██║██║   ██║██╔══╝  ╚════██║
+   ╚██████╗██║  ██║██║  ██║   ██║   ██║  ██║██║██████╔╝╚██████╔╝███████╗███████║
+    ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝╚═╝╚═════╝  ╚═════╝ ╚══════╝╚══════╝
 "@ -ForegroundColor Cyan
 
 
@@ -115,26 +87,14 @@ function Show-Menu {
 }
 
 
-
 while ($true) {
-
-
     Show-Menu
-
-
     $Option = Read-Host "     Select option"
 
-
     switch ($Option) {
-
-
         "1" {
-
             Clear-Host
-
             Write-Host "Starting installation..."
-
-
             Start-Process `
                 powershell.exe `
                 -Verb RunAs `
@@ -142,40 +102,23 @@ while ($true) {
                 -Wait
         }
 
-
-
         "2" {
-
             Clear-Host
-
             Write-Host "Starting trust process..."
-
-
             powershell.exe `
                 -ExecutionPolicy Bypass `
                 -File "$ScriptDir\windows\trust-script.ps1"
 
-
             Pause
         }
 
-
-
         "3" {
-
             Toggle-Mode
-
         }
 
-
-
         "4" {
-
             Clear-Host
-
             Write-Host "Starting uninstall..."
-
-
             Start-Process `
                 powershell.exe `
                 -Verb RunAs `
@@ -183,24 +126,14 @@ while ($true) {
                 -Wait
         }
 
-
-
         "5" {
-
             Clear-Host
-
             exit
         }
 
-
-
         default {
-
             Write-Host "Invalid option."
-
             Start-Sleep -Seconds 1
         }
-
     }
-
 }
