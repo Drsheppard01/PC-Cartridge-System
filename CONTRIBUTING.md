@@ -27,13 +27,13 @@ If you decide on using AI agent for code, consider important rules:
 * Please do not use AI to write entire code for you - it should be assistance, not developer replacement
 * Be honest about your AI usage and mention or co-author it in your pull requests
 
-This is a hobby project meant for people, by people, to try and enjoy creating their own creations - it is not a place for testing and improving your AI agents
+This is a hobby project meant for people, by people, to try and enjoy creating their own things - it is not a place for testing and improving your AI agents
 
 ## Issues and pull requests
 
-When making a pull request it is best practice to first open an issue. You are welcome to work on any currently open issue while keeping in mind:
+When making a pull request, it is best practice to first open an issue. You are welcome to work on any, currently open issue, while keeping in mind:
 
-* Bug reports should be exclusively human made and contain detailed information on how to replicate it
+* Bug reports should be exclusively human made and contain detailed information on how to replicate them
 * Features should adhere to the project designation
 * Pull requests should contain detailed list of changes and related issue number
 * Your code should be easily readable for everyone involved
@@ -41,6 +41,6 @@ When making a pull request it is best practice to first open an issue. You are w
 
 ## Final notes
 
-Even if obvious, it should be stated that it is not given that the repository will be rigorously maintained. It is a hobby project meant for people to enjoy for free, for themselves. You are also free to fork this repository and do whatever you want with it, as per MIT license, but if you want to help with contributions, please keep in mind all the above guidelines.
+Even if obvious, it should be stated that it is not given that this repository will be rigorously maintained. It is a hobby project meant for people to enjoy for free, for themselves. You are also free to fork this repository and do whatever you want with it, as per MIT license, but if you want to help with contributions, please keep in mind all the above guidelines.
 
 Thank you so much for getting involved and for simply enjoying this project.
