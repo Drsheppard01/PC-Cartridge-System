@@ -9,12 +9,6 @@ YELLOW="\033[1;33m"
 RESET="\033[0m"
 
 
-
-if [ "$EUID" -ne 0 ]; then
-    echo "Please run this script with sudo."
-    exit 1
-fi
-
 clear
 
 echo -e "${CYAN}"
@@ -47,7 +41,7 @@ case "$OPTION" in
     1)
         clear 2>/dev/null || printf "\033c"
         echo "Starting installation..."
-        bash "$SCRIPT_DIR/linux/install.sh"
+        sudo bash "$SCRIPT_DIR/linux/install.sh"
         ;;
 
     2)
@@ -63,7 +57,7 @@ case "$OPTION" in
     4)
         clear 2>/dev/null || printf "\033c"
         echo "Starting uninstall..."
-        bash "$SCRIPT_DIR/linux/uninstall.sh"
+        sudo bash "$SCRIPT_DIR/linux/uninstall.sh"
         ;;
 
     5)
