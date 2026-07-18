@@ -37,6 +37,7 @@ When making a pull request it is best practice to first open an issue. You are w
 * Features should adhere to the project designation
 * Pull requests should contain detailed list of changes and related issue number
 * Your code should be easily readable for everyone involved
+* Please do not pull request to main branch, instead use dev branch
 
 ## Final notes
 
