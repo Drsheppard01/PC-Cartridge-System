@@ -1,4 +1,4 @@
-$ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
+﻿$ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 
 # Colors
 $Cyan = "Cyan"
