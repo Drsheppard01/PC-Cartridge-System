@@ -36,62 +36,48 @@ cd Steam-Games-Cartridges
 ```
 Run the installer:
 ```bash
-sudo ./setup-linux.sh
+./cartridge-linux.sh
 ```
+<img width="796" height="410" alt="image" src="https://github.com/user-attachments/assets/3b6da377-049a-453b-8dfd-9cd2de70f00a" />
+
+**Installation**<br>
+Select menu point 1) Install<br>
 The installer will install the required udev rule, systemd service, and launcher helper.
 
-After you have created a Cartridge with the launch.sh script, add the script to trusted-scripts with:
-```bash
-./trust-script-linux.sh
-```
-Any script that hasn't been trusted through this process **will NOT be automatically executed**
-! If you modify the script later on, you have to re-add it to trusted scripts again.
+**Trust Scripts**<br>
+After you have created a Cartridge with the launch.sh script, add the script to trusted-scripts with menu point 2) Trust Scripts.
+It will scan for any connected storage media for the launch.sh script and ask if you want to trust said script:
+<img width="574" height="216" alt="image" src="https://github.com/user-attachments/assets/77c0e7cf-ba76-430a-99b0-4d97def11cdf" />
 
-To remove the installation:
-```bash
-sudo ./uninstall-linux.sh
-```
+Any script that hasn't been trusted through this process **will NOT be automatically executed**
+! If you modify the script later on, you have to re-add it to trusted scripts again.<br>
+
+**Uninstallation:**<br>
+Select menu point 4) Uninstall <br>
+This will remove everything including the config files and trust scripts list.
 
 ### Windows
 
 Download the repo:
-1. Click Code → Download ZIP
+1. Click Code → Download ZIP OR download it from [Releases](https://github.com/LewdM3at/Steam-Games-Cartridges/releases)
 2. Extract it
-   
-Open the extracted directory and keep going until you see this repo's files.
+3. Right click on cartridge-windows.ps1 -> Run with Powershell
 
-Copy the folder's full path.
+**Installation**<br>
+Select menu point 1) Install<br>
+The installer will install the required udev rule, systemd service, and launcher helper.
 
-Start Powershell as Administrator.
+**Trust Scripts**<br>
+After you have created a Cartridge with the launch.sh script, add the script to trusted-scripts with menu point 2) Trust Scripts.
+It will scan for any connected storage media for the launch.sh script and ask if you want to trust said script.
 
-Run:
-```bash
-cd <paste the full path here>
-```
-
-Run the installer:
-```bash
-.\setup-windows.ps1
-```
-The installer will create the background cartridge monitor using Windows Task Scheduler.
-
-If PowerShell blocks script execution, run:
-```bash
-Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
-```
-and run the installer again.
-
-After you have created a Cartridge with the launch.ps1 script, add the script to trusted-scripts with:
-```bash
-.\trust-script-windows.ps1
-```
 Any script that hasn't been trusted through this process **will NOT be automatically executed**
- If you modify the script later on, you have to re-add it to trusted scripts again.
+! If you modify the script later on, you have to re-add it to trusted scripts again.<br>
 
-To remove the installation:
-```bash
-.\uninstall-windows.ps1
-```
+**Uninstallation:**<br>
+Select menu point 4) Uninstall <br>
+This will remove everything including the config files and trust scripts list.
+
 
 ## Supported Storage
 
