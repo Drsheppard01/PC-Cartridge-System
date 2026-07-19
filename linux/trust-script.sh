@@ -12,6 +12,30 @@ RESET="\033[0m"
 mkdir -p "$TRUST_DIR"
 touch "$TRUST_FILE"
 
+wait_for_cartridge_or_exit()
+{
+    while true; do
+
+        # check if user pressed e
+        if [ -f /tmp/cartridge-exit ]; then
+            rm -f /tmp/cartridge-exit
+            exit 0
+        fi
+
+        # check keyboard input
+        read -rsn1 -t 0.1 KEY || true
+
+        if [[ "$KEY" == "e" || "$KEY" == "E" ]]; then
+            echo ""
+            echo " Exiting..."
+            exit 0
+        fi
+
+        sleep 0.1
+
+    done
+}
+
 
 while true; do
 
@@ -37,8 +61,20 @@ while true; do
         clear 2>/dev/null || printf "\033c"
         echo ""
         echo " Insert cartridge to check the trust state..."
+        echo " (Press E to exit.)"
 
-        sleep 3
+        for i in {1..30}; do
+
+            read -rsn1 -t 0.1 KEY || true
+
+            if [[ "$KEY" == "e" || "$KEY" == "E" ]]; then
+                echo ""
+                echo " Exiting..."
+                exit 0
+            fi
+
+        done
+
         continue
 
     fi
