@@ -67,15 +67,15 @@ EOF
 echo -e "${RESET}"
 
 
-echo "        ╭────────────────────────────────────────╮"
-echo "        │      Menu                              │"
-echo "        ├────────────────────────────────────────┤"
-echo "        │   1) Install                           │"
-echo "        │   2) Trust Scripts                     │"
-echo -e "        │   3) Auto-Launch scripts: $MODE_TEXT          │"
-echo "        │   4) Uninstall                         │"
-echo "        │   5) Exit                              │"
-echo "        ╰────────────────────────────────────────╯"
+echo "        ╭─────────────────────────────────────────╮"
+echo "        │      Menu                               │"
+echo "        ├─────────────────────────────────────────┤"
+echo "        │   1) Install                            │"
+echo "        │   2) Trust Scripts / Check trust state  │"
+echo -e "        │   3) Auto-Launch scripts: $MODE_TEXT           │"
+echo "        │   4) Uninstall                          │"
+echo "        │   5) Exit                               │"
+echo "        ╰─────────────────────────────────────────╯"
 echo ""
 
 read -rp "     Select option: " OPTION
