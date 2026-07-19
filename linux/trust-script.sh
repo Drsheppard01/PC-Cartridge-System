@@ -5,6 +5,9 @@ set -e
 TRUST_DIR="$HOME/.config/steam-games-cartridges"
 TRUST_FILE="$TRUST_DIR/trusted_scripts.sha256"
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+ROOT_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
+
 GREEN="\033[0;32m"
 RED="\033[0;31m"
 RESET="\033[0m"
@@ -12,37 +15,12 @@ RESET="\033[0m"
 mkdir -p "$TRUST_DIR"
 touch "$TRUST_FILE"
 
-wait_for_cartridge_or_exit()
-{
-    while true; do
-
-        # check if user pressed e
-        if [ -f /tmp/cartridge-exit ]; then
-            rm -f /tmp/cartridge-exit
-            exit 0
-        fi
-
-        # check keyboard input
-        read -rsn1 -t 0.1 KEY || true
-
-        if [[ "$KEY" == "e" || "$KEY" == "E" ]]; then
-            echo ""
-            echo " Exiting..."
-            exit 0
-        fi
-
-        sleep 0.1
-
-    done
-}
-
 
 while true; do
 
     FOUND_SCRIPT=""
     FOUND_DEVICE=""
     FOUND_MOUNT=""
-
 
     while read -r DEVICE MOUNTPOINT; do
 
@@ -70,7 +48,9 @@ while true; do
             if [[ "$KEY" == "e" || "$KEY" == "E" ]]; then
                 echo ""
                 echo " Exiting..."
-                exit 0
+                sleep 1
+                clear 2>/dev/null || printf "\033c"
+                exec bash "$ROOT_DIR/cartridge-linux.sh"
             fi
 
         done
