@@ -67,11 +67,11 @@ function Show-Menu {
 
 
     Write-Host ""
-    Write-Host "        ╭────────────────────────────────────────╮"
-    Write-Host "        │      Menu                              │"
-    Write-Host "        ├────────────────────────────────────────┤"
-    Write-Host "        │   1) Install                           │"
-    Write-Host "        │   2) Trust Scripts                     │"
+    Write-Host "        ╭─────────────────────────────────────────╮"
+    Write-Host "        │      Menu                               │"
+    Write-Host "        ├─────────────────────────────────────────┤"
+    Write-Host "        │   1) Install                            │"
+    Write-Host "        │   2) Trust Scripts / Check trust state  │"
 
     Write-Host -NoNewline "        │   3) Auto-Launch scripts: "
 
@@ -79,9 +79,9 @@ function Show-Menu {
 
     Write-Host "          │"
 
-    Write-Host "        │   4) Uninstall                         │"
-    Write-Host "        │   5) Exit                              │"
-    Write-Host "        ╰────────────────────────────────────────╯"
+    Write-Host "        │   4) Uninstall                          │"
+    Write-Host "        │   5) Exit                               │"
+    Write-Host "        ╰─────────────────────────────────────────╯"
     Write-Host ""
 
 }
