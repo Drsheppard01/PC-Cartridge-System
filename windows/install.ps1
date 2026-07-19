@@ -68,12 +68,24 @@ Write-Host "Creating scheduled task..."
 
 # Remove old task if it exists
 
-if (Get-ScheduledTask -TaskName $TaskName -ErrorAction SilentlyContinue) {
+$ExistingTask = Get-ScheduledTask `
+    -TaskName $TaskName `
+    -ErrorAction SilentlyContinue
+
+if ($null -ne $ExistingTask) {
+    Write-Host "Stopping existing monitor..."
+
+    Stop-ScheduledTask `
+        -TaskName $TaskName `
+        -ErrorAction SilentlyContinue
+
+    Start-Sleep -Seconds 1
+
+    Write-Host "Removing old scheduled task..."
 
     Unregister-ScheduledTask `
         -TaskName $TaskName `
         -Confirm:$false
-
 }
 
 
