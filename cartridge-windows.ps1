@@ -77,7 +77,7 @@ function Show-Menu {
 
     Write-Host -NoNewline $ModeText -ForegroundColor $ModeColor
 
-    Write-Host "          │"
+    Write-Host "           │"
 
     Write-Host "        │   4) Uninstall                          │"
     Write-Host "        │   5) Exit                               │"
@@ -105,11 +105,8 @@ while ($true) {
         "2" {
             Clear-Host
             Write-Host "Starting trust process..."
-            powershell.exe `
-                -ExecutionPolicy Bypass `
-                -File "$ScriptDir\windows\trust-script.ps1"
-
-            Pause
+            & "$ScriptDir\windows\trust-script.ps1"
+            Clear-Host
         }
 
         "3" {

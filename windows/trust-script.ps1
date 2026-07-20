@@ -70,7 +70,6 @@ while ($true) {
                 if ($Key.Key -eq "E") {
 
                     Clear-Host
-                    & "$RootDir\cartridge-windows.ps1"
                     exit 0
                 }
             }
