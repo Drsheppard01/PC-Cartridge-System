@@ -1,8 +1,8 @@
 [Unit]
-Description=Steam Game Cartridge (%i)
+Description=PC Cartridge System (%i)
 After=dev-%i.device
 
 [Service]
 Type=oneshot
 User=__USERNAME__
-ExecStart=/usr/local/bin/cartridge-launcher-helper %i
+ExecStart=/usr/local/bin/pc-cartridge-system-helper %i
