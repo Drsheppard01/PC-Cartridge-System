@@ -67,7 +67,7 @@ This will remove everything including the config files and trust scripts list.
 ### Windows
 
 Download the repo:
-1. Click Code → Download ZIP OR download it from [Releases](https://github.com/LewdM3at/Steam-Games-Cartridges/releases)
+1. Click Code → Download ZIP OR download it from [Releases](https://github.com/LewdM3at/PC-Cartridge-System/releases)
 2. Extract it
 3. Right click on cartridge-windows.ps1 -> Run with Powershell
 <br>
