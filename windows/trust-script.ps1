@@ -142,9 +142,8 @@ while ($true) {
 
             "y" {
 
-                $TrustedHashes |
-                    Where-Object { $_ -ne $Hash } |
-                    Set-Content $TrustFile
+                $NewContent = @($TrustedHashes) | Where-Object { $_ -ne $Hash }
+                Set-Content -Path $TrustFile -Value $NewContent
 
                 Write-Host ""
                 Write-Host " Trust removed." -ForegroundColor $Red
@@ -224,17 +223,11 @@ while ($true) {
 
     Start-Sleep -Seconds 2
 
-
-
     # Wait until cartridge is removed
     while (Test-Path $FoundScript) {
 
         Start-Sleep -Seconds 2
 
     }
-
-
-
     Clear-Host
-
 }

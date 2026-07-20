@@ -13,8 +13,8 @@ Write-Host ""
 ########################################
 
 $InstallFolders = @(
-    Join-Path $env:LOCALAPPDATA "SteamGameCartridge",
-    Join-Path $env:LOCALAPPDATA "PC-Cartridge-System"
+    (Join-Path $env:LOCALAPPDATA "SteamGameCartridge")
+    (Join-Path $env:LOCALAPPDATA "PC-Cartridge-System")
 )
 
 $TaskNames = @(
