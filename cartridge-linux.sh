@@ -2,7 +2,7 @@
 
 SCRIPT_DIR="$(dirname "$0")"
 
-CONFIG_DIR="$HOME/.config/steam-games-cartridges"
+CONFIG_DIR="$HOME/.config/pc-cartridge-system"
 CONFIG_FILE="$CONFIG_DIR/settings.conf"
 
 

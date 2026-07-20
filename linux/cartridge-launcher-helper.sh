@@ -4,7 +4,7 @@ set -e
 
 DEVICE="$1"
 
-TRUST_DIR="$HOME/.config/steam-games-cartridges"
+TRUST_DIR="$HOME/.config/pc-cartridge-system"
 TRUST_FILE="$TRUST_DIR/trusted_scripts.sha256"
 CONFIG_FILE="$TRUST_DIR/settings.conf"
 

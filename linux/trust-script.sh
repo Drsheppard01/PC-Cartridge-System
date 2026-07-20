@@ -2,7 +2,7 @@
 
 set -e
 
-TRUST_DIR="$HOME/.config/steam-games-cartridges"
+TRUST_DIR="$HOME/.config/pc-cartridge-system"
 TRUST_FILE="$TRUST_DIR/trusted_scripts.sha256"
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"

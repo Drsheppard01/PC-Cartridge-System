@@ -30,6 +30,7 @@ systemctl stop 'game-cartridge@*' 2>/dev/null || true
 echo "Removing launcher helper..."
 
 rm -f /usr/local/bin/cartridge-launcher-helper
+rm -f /usr/local/bin/pc-cartridge-system-helper
 
 
 ########################################
@@ -47,6 +48,7 @@ rm -f /etc/systemd/system/game-cartridge@.service
 
 echo "Removing udev rule..."
 
+rm -f /etc/udev/rules.d/99-steam-game-cartridge.rules
 rm -f /etc/udev/rules.d/99-game-cartridge.rules
 
 #######################################################################
