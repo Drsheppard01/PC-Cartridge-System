@@ -38,7 +38,8 @@ Run the script:
 ```bash
 ./cartridge-linux.sh
 ```
-<img width="796" height="410" alt="image" src="https://github.com/user-attachments/assets/3b6da377-049a-453b-8dfd-9cd2de70f00a" />
+<img width="811" height="425" alt="image" src="https://github.com/user-attachments/assets/9118395d-f977-48bb-bf3a-867d5a6143fd" />
+
 
 **Installation**<br>
 Select menu point 1) Install<br>
@@ -47,7 +48,8 @@ The installer will install the required udev rule, systemd service, and launcher
 **Trust Scripts / Check trust state**<br>
 After you have created a Cartridge with the launch.sh script, add the script to trusted-scripts with menu point 2) Trust Scripts.
 It will scan for any connected storage media for the launch.sh script and ask if you want to trust said script:
-<img width="574" height="216" alt="image" src="https://github.com/user-attachments/assets/77c0e7cf-ba76-430a-99b0-4d97def11cdf" />
+<img width="656" height="592" alt="image" src="https://github.com/user-attachments/assets/ec8772e4-8e48-40f4-878b-5741eac8cc05" />
+
 
 You can also check the trust state of scripts here and have the option to stop trusting the scripts if they are already trusted.
 
@@ -70,6 +72,8 @@ Download the repo:
 1. Click Code → Download ZIP OR download it from [Releases](https://github.com/LewdM3at/PC-Cartridge-System/releases)
 2. Extract it
 3. Right click on cartridge-windows.ps1 -> Run with Powershell
+
+<img width="807" height="329" alt="image" src="https://github.com/user-attachments/assets/88e48354-0e2a-4d78-8e93-81e306e84617" />
 <br>
 
 **Installation**<br>
@@ -79,11 +83,15 @@ The installer will install the required udev rule, systemd service, and launcher
 **Trust Scripts**<br>
 After you have created a Cartridge with the launch.sh script, add the script to trusted-scripts with menu point 2) Trust Scripts.
 It will scan for any connected storage media for the launch.sh script and ask if you want to trust said script.
+<img width="656" height="446" alt="image" src="https://github.com/user-attachments/assets/a1c71905-2e77-4ec0-99da-1a8e78f65035" />
 
+You can also check the trust state of scripts here and have the option to stop trusting the scripts if they are already trusted.
 Any script that hasn't been trusted through this process **will NOT be automatically executed**
 ! If you modify the script later on, you have to re-add it to trusted scripts again.<br>
 
 **Auto-Launch Scripts**<br>
+<img width="442" height="157" alt="image" src="https://github.com/user-attachments/assets/51109e77-a2e0-45da-be9a-3b621d3c7fd1" />
+
 You can toggle the automatic execution of scripts by choosing this menu point.<br>
 For when you want to change something inside the script and don't want it to auto-launch when you insert the cartridge.<br>
 
