@@ -7,7 +7,7 @@ if [ "$EUID" -ne 0 ]; then
     exit 1
 fi
 
-echo "Installing Steam Game Cartridge launcher..."
+echo "Installing PC Cartridge System..."
 
 # Check for important files
 
@@ -44,7 +44,7 @@ echo "Home directory: $USER_HOME"
 
 echo "Installing launcher helper..."
 
-install -m 755 linux/cartridge-launcher-helper.sh /usr/local/bin/cartridge-launcher-helper
+install -m 755 linux/cartridge-launcher-helper.sh /usr/local/bin/pc-cartridge-system-helper
 
 
 ########################################
@@ -64,7 +64,7 @@ sed "s/__USERNAME__/$USERNAME/g" \
 
 echo "Installing udev rule..."
 
-install -m 644 linux/99-game-cartridge.rules /etc/udev/rules.d/99-steam-game-cartridge.rules
+install -m 644 linux/99-game-cartridge.rules /etc/udev/rules.d/99-game-cartridge.rules
 
 
 ########################################
@@ -84,25 +84,25 @@ udevadm trigger
 
 echo ""
 echo "=========================================="
-echo " Steam Game Cartridge installed"
+echo " PC Cartridge System installed"
 echo "=========================================="
 echo ""
-echo "Create cartridges with:"
+echo " Create cartridges with:"
 echo ""
 echo "  launch.sh"
 echo ""
-echo "Example:"
+echo " Example:"
 echo ""
 echo "  #!/bin/bash"
 echo "  steam steam://rungameid/12345"
 echo ""
-echo "The SSD must be automatically mounted by"
-echo "your desktop environment."
+echo " The SSD must be automatically mounted by"
+echo " your desktop environment."
 echo ""
-echo "If your distro does not automount drives,"
-echo "configure automount manually or install"
-echo "a tool such as udiskie."
+echo " If your distro does not automount drives,"
+echo " configure automount manually or install"
+echo " a tool such as udiskie."
 echo ""
-echo "Create a 'launch.sh' script on the cartridge and trust it with 'trust-script-linux.sh'"
-echo "Then re-insert the cartridge to test."
+echo " Create a 'launch.sh' script on the cartridge and trust it with 'trust-script-linux.sh'"
+echo " Then re-insert the cartridge to test."
 echo ""

@@ -1,10 +1,10 @@
-# Steam Game Cartridge Uninstaller
+# PC Cartridge System Uninstaller
 
 $ErrorActionPreference = "Stop"
 
 
 Write-Host ""
-Write-Host "Uninstalling Steam Game Cartridge launcher..."
+Write-Host "Uninstalling PC Cartridge System..."
 Write-Host ""
 
 
@@ -12,41 +12,42 @@ Write-Host ""
 # Paths
 ########################################
 
-$InstallFolder = Join-Path $env:LOCALAPPDATA "SteamGameCartridge"
+$InstallFolders = @(
+    (Join-Path $env:LOCALAPPDATA "SteamGameCartridge")
+    (Join-Path $env:LOCALAPPDATA "PC-Cartridge-System")
+)
 
-$TaskName = "Steam Game Cartridge Monitor"
+$TaskNames = @(
+    "Steam Game Cartridge Monitor",
+    "PC Cartridge System Monitor"
+)
 
 
 ########################################
-# Remove scheduled task
+# Remove scheduled tasks
 ########################################
 
-Write-Host "Removing scheduled task..."
+Write-Host "Removing scheduled tasks..."
 
-
-$Task = Get-ScheduledTask `
-    -TaskName $TaskName `
-    -ErrorAction SilentlyContinue
-
-
-if ($null -ne $Task) {
-
-    Write-Host "Stopping monitor..."
-
-    Stop-ScheduledTask `
+foreach ($TaskName in $TaskNames) {
+    $Task = Get-ScheduledTask `
         -TaskName $TaskName `
         -ErrorAction SilentlyContinue
 
+    if ($null -ne $Task) {
+        Write-Host "Stopping monitor: $TaskName"
 
-    Unregister-ScheduledTask `
-        -TaskName $TaskName `
-        -Confirm:$false
+        Stop-ScheduledTask `
+            -TaskName $TaskName `
+            -ErrorAction SilentlyContinue
 
-}
-else {
-
-    Write-Host "Scheduled task not found."
-
+        Unregister-ScheduledTask `
+            -TaskName $TaskName `
+            -Confirm:$false
+    }
+    else {
+        Write-Host "Scheduled task not found: $TaskName"
+    }
 }
 
 
@@ -56,19 +57,18 @@ else {
 
 Write-Host "Removing installed files..."
 
+foreach ($InstallFolder in $InstallFolders) {
+    if (Test-Path $InstallFolder) {
+        Write-Host "Removing $InstallFolder"
 
-if (Test-Path $InstallFolder) {
-
-    Remove-Item `
-        -Path $InstallFolder `
-        -Recurse `
-        -Force
-
-}
-else {
-
-    Write-Host "Install directory not found."
-
+        Remove-Item `
+            -Path $InstallFolder `
+            -Recurse `
+            -Force
+    }
+    else {
+        Write-Host "Install directory not found: $InstallFolder"
+    }
 }
 
 
@@ -78,6 +78,6 @@ else {
 
 Write-Host ""
 Write-Host "=========================================="
-Write-Host " Steam Game Cartridge removed"
+Write-Host " PC Cartridge System removed"
 Write-Host "=========================================="
 Write-Host ""

@@ -2,7 +2,7 @@
 
 
 # Config
-$ConfigDir = Join-Path $env:LOCALAPPDATA "SteamGameCartridge"
+$ConfigDir = Join-Path $env:LOCALAPPDATA "PC-Cartridge-System"
 $ConfigFile = Join-Path $ConfigDir "settings.conf"
 
 
@@ -67,21 +67,21 @@ function Show-Menu {
 
 
     Write-Host ""
-    Write-Host "        ╭────────────────────────────────────────╮"
-    Write-Host "        │      Menu                              │"
-    Write-Host "        ├────────────────────────────────────────┤"
-    Write-Host "        │   1) Install                           │"
-    Write-Host "        │   2) Trust Scripts                     │"
+    Write-Host "        ╭─────────────────────────────────────────╮"
+    Write-Host "        │      Menu                               │"
+    Write-Host "        ├─────────────────────────────────────────┤"
+    Write-Host "        │   1) Install                            │"
+    Write-Host "        │   2) Trust Scripts / Check trust state  │"
 
     Write-Host -NoNewline "        │   3) Auto-Launch scripts: "
 
     Write-Host -NoNewline $ModeText -ForegroundColor $ModeColor
 
-    Write-Host "          │"
+    Write-Host "           │"
 
-    Write-Host "        │   4) Uninstall                         │"
-    Write-Host "        │   5) Exit                              │"
-    Write-Host "        ╰────────────────────────────────────────╯"
+    Write-Host "        │   4) Uninstall                          │"
+    Write-Host "        │   5) Exit                               │"
+    Write-Host "        ╰─────────────────────────────────────────╯"
     Write-Host ""
 
 }
@@ -105,11 +105,8 @@ while ($true) {
         "2" {
             Clear-Host
             Write-Host "Starting trust process..."
-            powershell.exe `
-                -ExecutionPolicy Bypass `
-                -File "$ScriptDir\windows\trust-script.ps1"
-
-            Pause
+            & "$ScriptDir\windows\trust-script.ps1"
+            Clear-Host
         }
 
         "3" {
