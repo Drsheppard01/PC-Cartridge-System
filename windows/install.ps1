@@ -18,6 +18,10 @@ $MonitorSource = Join-Path $PSScriptRoot "cartridge-monitoring.ps1"
 
 $MonitorTarget = Join-Path $InstallFolder "cartridge-monitoring.ps1"
 
+$LauncherSource = Join-Path $PSScriptRoot "cartridge-monitoring-launcher.vbs"
+
+$LauncherTarget = Join-Path $InstallFolder "cartridge-monitoring-launcher.vbs"
+
 
 ########################################
 # Check source file
@@ -31,6 +35,13 @@ if (-not (Test-Path $MonitorSource)) {
     exit 1
 }
 
+if (-not (Test-Path $LauncherSource)) {
+
+    Write-Error "Missing file:"
+    Write-Error $LauncherSource
+
+    exit 1
+}
 
 ########################################
 # Create install folder
@@ -53,6 +64,11 @@ Write-Host "Installing cartridge monitor..."
 Copy-Item `
     -Path $MonitorSource `
     -Destination $MonitorTarget `
+    -Force
+
+Copy-Item `
+    -Path $LauncherSource `
+    -Destination $LauncherTarget `
     -Force
 
 
@@ -90,13 +106,8 @@ if ($null -ne $ExistingTask) {
 
 
 $Action = New-ScheduledTaskAction `
-    -Execute "powershell.exe" `
-    -Argument (
-        "-NoProfile " +
-        "-ExecutionPolicy Bypass " +
-        "-WindowStyle Hidden " +
-        "-File `"$MonitorTarget`""
-    )
+    -Execute "wscript.exe" `
+    -Argument "`"$LauncherTarget`""
 
 
 $Trigger = New-ScheduledTaskTrigger `

@@ -92,7 +92,7 @@ function Get-Mode {
 Write-Log "Steam Game Cartridge monitor started."
 
 
-Register-WmiEvent `
+$null = Register-WmiEvent `
     -Class Win32_VolumeChangeEvent `
     -SourceIdentifier "SteamGameCartridge" `
     -Action {
@@ -168,7 +168,7 @@ Register-WmiEvent `
 
                 Write-Log "Blocked untrusted cartridge."
 
-                return
+                    return
             }
 
 
