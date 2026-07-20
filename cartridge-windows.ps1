@@ -2,7 +2,7 @@
 
 
 # Config
-$ConfigDir = Join-Path $env:LOCALAPPDATA "SteamGameCartridge"
+$ConfigDir = Join-Path $env:LOCALAPPDATA "PC-Cartridge-System"
 $ConfigFile = Join-Path $ConfigDir "settings.conf"
 
 

@@ -1,6 +1,6 @@
-# Steam Game Cartridge Trust Monitor (Windows)
+# PC Cartridge System Trust Script (Windows)
 
-$TrustDir = Join-Path $env:LOCALAPPDATA "SteamGameCartridge"
+$TrustDir = Join-Path $env:LOCALAPPDATA "PC-Cartridge-System"
 $TrustFile = Join-Path $TrustDir "trusted_scripts.sha256"
 
 $ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path

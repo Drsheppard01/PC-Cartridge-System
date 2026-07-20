@@ -4,7 +4,7 @@ $ErrorActionPreference = "Stop"
 
 
 Write-Host ""
-Write-Host "Installing Steam Game Cartridge launcher..."
+Write-Host "Installing PC Cartridge System..."
 Write-Host ""
 
 
@@ -12,7 +12,7 @@ Write-Host ""
 # Paths
 ########################################
 
-$InstallFolder = Join-Path $env:LOCALAPPDATA "SteamGameCartridge"
+$InstallFolder = Join-Path $env:LOCALAPPDATA "PC-Cartridge-System"
 
 $MonitorSource = Join-Path $PSScriptRoot "cartridge-monitoring.ps1"
 
@@ -59,7 +59,7 @@ New-Item `
 # Install monitor
 ########################################
 
-Write-Host "Installing cartridge monitor..."
+Write-Host "Installing cartridge monitoring..."
 
 Copy-Item `
     -Path $MonitorSource `
@@ -76,32 +76,33 @@ Copy-Item `
 # Create scheduled task
 ########################################
 
-$TaskName = "Steam Game Cartridge Monitor"
+# Clean up old scheduled tasks if they exist
+$TaskNames = @(
+    "PC Cartridge System Monitor",
+    "Steam Game Cartridge Monitor"
+)
 
+foreach ($TaskName in $TaskNames) {
 
-Write-Host "Creating scheduled task..."
-
-
-# Remove old task if it exists
-
-$ExistingTask = Get-ScheduledTask `
-    -TaskName $TaskName `
-    -ErrorAction SilentlyContinue
-
-if ($null -ne $ExistingTask) {
-    Write-Host "Stopping existing monitor..."
-
-    Stop-ScheduledTask `
+    $ExistingTask = Get-ScheduledTask `
         -TaskName $TaskName `
         -ErrorAction SilentlyContinue
 
-    Start-Sleep -Seconds 1
+    if ($null -ne $ExistingTask) {
+        Write-Host "Stopping existing monitor: $TaskName"
 
-    Write-Host "Removing old scheduled task..."
+        Stop-ScheduledTask `
+            -TaskName $TaskName `
+            -ErrorAction SilentlyContinue
 
-    Unregister-ScheduledTask `
-        -TaskName $TaskName `
-        -Confirm:$false
+        Start-Sleep -Seconds 1
+
+        Write-Host "Removing old scheduled task: $TaskName"
+
+        Unregister-ScheduledTask `
+            -TaskName $TaskName `
+            -Confirm:$false
+    }
 }
 
 
@@ -119,13 +120,14 @@ $Settings = New-ScheduledTaskSettingsSet `
     -RestartCount 3 `
     -RestartInterval (New-TimeSpan -Minutes 1)
 
+$TaskName = "PC Cartridge System Monitor"
 
 Register-ScheduledTask `
     -TaskName $TaskName `
     -Action $Action `
     -Trigger $Trigger `
     -Settings $Settings `
-    -Description "Monitors inserted Steam Game Cartridges"
+    -Description "Monitors inserted PC Game Cartridges"
 
 
 ########################################
@@ -144,34 +146,34 @@ Start-ScheduledTask `
 
 Write-Host ""
 Write-Host "=========================================="
-Write-Host " Steam Game Cartridge installed"
+Write-Host " PC Cartridge System installed"
 Write-Host "=========================================="
 Write-Host ""
 
-Write-Host "Create cartridges with:"
+Write-Host " Create cartridges with:"
 Write-Host ""
 
 Write-Host "  launch.ps1"
 Write-Host ""
 
-Write-Host "Example:"
+Write-Host " Example:"
 Write-Host ""
 
 Write-Host '  Start-Process "steam://rungameid/1091500"'
 
 Write-Host ""
 
-Write-Host "The cartridge SSD must contain:"
+Write-Host " The cartridge SSD must contain:"
 Write-Host ""
 
 Write-Host "  launch.ps1"
 
 Write-Host ""
-Write-Host "Trust the script with 'trust-script-windows.ps1'"
-Write-Host "Then re-insert the cartridge to test."
+Write-Host " Trust the script with 'trust-script-windows.ps1'"
+Write-Host " Then re-insert the cartridge to test."
 Write-Host ""
 
-Write-Host "Monitor location:"
+Write-Host " Monitor location:"
 Write-Host $MonitorTarget
 
 Write-Host ""

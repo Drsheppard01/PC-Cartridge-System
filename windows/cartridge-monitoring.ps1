@@ -1,7 +1,7 @@
-# Steam Game Cartridge Monitor
+# PC Cartridge System Monitor
 # Watches for inserted drives and launches trusted launch.ps1 cartridges.
 
-$InstallFolder = Join-Path $env:LOCALAPPDATA "SteamGameCartridge"
+$InstallFolder = Join-Path $env:LOCALAPPDATA "PC-Cartridge-System"
 
 $LogFile = Join-Path $InstallFolder "monitor.log"
 $TrustFile = Join-Path $InstallFolder "trusted_scripts.sha256"
@@ -89,12 +89,12 @@ function Get-Mode {
 }
 
 
-Write-Log "Steam Game Cartridge monitor started."
+Write-Log "PC Cartridge System monitor started."
 
 
 $null = Register-WmiEvent `
     -Class Win32_VolumeChangeEvent `
-    -SourceIdentifier "SteamGameCartridge" `
+    -SourceIdentifier "PCCartridgeSystem" `
     -Action {
 
 
@@ -216,11 +216,11 @@ try {
 finally {
 
     Unregister-Event `
-        -SourceIdentifier "SteamGameCartridge" `
+        -SourceIdentifier "PCCartridgeSystem" `
         -ErrorAction SilentlyContinue
 
     Remove-Job `
-        -Name "SteamGameCartridge" `
+        -Name "PCCartridgeSystem" `
         -Force `
         -ErrorAction SilentlyContinue
 
