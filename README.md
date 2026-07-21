@@ -140,7 +140,7 @@ Example cartridge:<br>
 SSD<br>
 └── launch.sh<br>
 └── SteamLibrary<br>
-The contents of `launch.sh` decide what happens next.
+The content of `launch.sh` decide what happens next.
 
 ---
 
@@ -161,4 +161,4 @@ Example cartridge:<br>
 SSD<br>
 └── launch.ps1<br>
 └── SteamLibrary<br>
-The contents of `launch.ps1` decide what happens next.
+The content of `launch.ps1` decide what happens next.
