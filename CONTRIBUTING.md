@@ -36,6 +36,7 @@ When making a pull request, it is best practice to first open an issue. You are 
 * Bug reports should be exclusively human made and contain detailed information on how to replicate them
 * Features should adhere to the project designation
 * Pull requests should contain detailed list of changes and related issue number
+* Pull requests should contain a single topic as far as possible. Don't create pull requests where you add 4 features and fixed 6 bugs at the same time.
 * Your code should be easily readable for everyone involved
 * Please do not pull request to main branch, instead use dev branch
 
