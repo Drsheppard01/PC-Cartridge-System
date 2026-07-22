@@ -173,7 +173,9 @@ fi
 
 
 # Navigate to game's page
-echo "Navigating to the most likely Steam collection..."
+echo "Switching to Big Picture mode and navigating to the most likely Steam collection..."
+steam steam://open/bigpicture
+sleep 5  # Wait for Big Picture mode to load for a bit before sending nav command
 steam steam://nav/games/library/collection/${COLLECTION_IDS[$BEST_INDEX]}
 
 # For other Steam URL Protocol commands check the documentation:
