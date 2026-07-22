@@ -25,6 +25,8 @@ if [ -z "$COMPATDATA_DIR" ]; then
     exit 1
 fi
 
+echo "Comapatdata directory: $COMPATDATA_DIR"
+
 # Take the folder name of the first folder inside compatdata as the game ID
 GAMEID_DIR=$(find "$COMPATDATA_DIR" \
     -mindepth 1 \
@@ -36,6 +38,8 @@ if [ -z "$GAMEID_DIR" ]; then
     echo "ERROR: No game folder inside compatdata"
     exit 1
 fi
+
+echo "Game folder: $GAMEID_DIR"
 
 # Removes the path to the compatdata folder, leaving only the game ID
 GAME_ID=$(basename "$GAMEID_DIR")

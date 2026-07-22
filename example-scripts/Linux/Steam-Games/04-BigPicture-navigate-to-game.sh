@@ -2,7 +2,7 @@
 
 # Put this script on your SSD at root level and name it "launch.sh" (without quotes). 
 
-#### This script will automatically detects the game on this storage device and navigate to the game's page on Steam then launch it. ####
+#### This script will automatically detects the game on this storage device, switch to Big Picture mode, and navigate to the game's page. ####
 # Meant for single game cartridges.
 
 
@@ -45,12 +45,11 @@ echo "Game folder: $GAMEID_DIR"
 GAME_ID=$(basename "$GAMEID_DIR")
 echo "Found Game ID: $GAME_ID"
 
-# Launch the game
-echo "Navigating to game's page on Steam and launch it..."
+# Navigate to game's page
+echo "Switching to Big Picture mode and navigating to game's page..."
+steam steam://open/bigpicture
+sleep 5  # Wait for Big Picture mode to load for a bit before sending nav command
 steam steam://nav/games/details/$GAME_ID
-steam steam://launch/$GAME_ID
-# This might ask you to install the game if Steam doesn't detect the storage drive automatically. 
-# If that happens, just cancel the installation and go to Settings -> Storage -> Add Drive.
 
 # For other Steam URL Protocol commands check the documentation:
 # https://developer.valvesoftware.com/wiki/Steam_browser_protocol
