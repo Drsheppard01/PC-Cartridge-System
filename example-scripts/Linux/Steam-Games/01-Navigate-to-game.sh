@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Put this script on your SSD at root level and name it "launch.sh" (without quotes). 
 
