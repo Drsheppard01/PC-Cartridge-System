@@ -47,7 +47,7 @@ echo "Found Game ID: $GAME_ID"
 
 # Launch the game
 echo "Launching game..."
-steam steam://launch/$GAME_ID
+steam steam://launch/$GAME_ID/dialog
 # This might ask you to install the game if Steam doesn't detect the storage drive automatically. 
 # If that happens, just cancel the installation and go to Settings -> Storage -> Add Drive.
 
