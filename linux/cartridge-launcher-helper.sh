@@ -8,6 +8,12 @@ TRUST_DIR="$HOME/.config/pc-cartridge-system"
 TRUST_FILE="$TRUST_DIR/trusted_scripts.sha256"
 CONFIG_FILE="$TRUST_DIR/settings.conf"
 
+mkdir -p "$TRUST_DIR"
+LOG_FILE="$TRUST_DIR/helper_script.log"
+# Log all stdout and stderr to file while keeping terminal output
+exec > >(tee "$LOG_FILE") 2>&1
+echo "==== Cartridge helper started: $(date) ===="
+
 echo "Game cartridge detected: $DEVICE"
 
 
