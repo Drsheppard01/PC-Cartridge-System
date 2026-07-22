@@ -66,6 +66,7 @@ USER_HOME=$(eval echo "~$USERNAME")
 echo "Removing config directory..."
 
 rm -rf "$USER_HOME/.config/steam-games-cartridges"
+rm -rf "$USER_HOME/.config/pc-cartridge-system"
 
 
 ########################################
