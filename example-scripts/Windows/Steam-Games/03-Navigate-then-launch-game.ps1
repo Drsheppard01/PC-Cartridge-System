@@ -1,6 +1,6 @@
 # Put this script on your SSD at root level and name it "launch.ps1".
 
-#### This script will automatically detects the game on this storage device and launch it via Steam. ####
+#### This script will automatically detects the game on this storage device and navigate to the game's page on Steam then launch it. ####
 # Meant for single game cartridges.
 
 $ErrorActionPreference = "Stop"
@@ -57,6 +57,7 @@ try {
 
     Write-Host "Navigating to game's page on Steam..."
 
+    Start-Process "steam://nav/games/details/$GAME_ID"
     Start-Process "steam://launch/$GAME_ID/dialog"
     # This might ask you to install the game if Steam doesn't detect the storage drive automatically. 
     # If that happens, just cancel the installation and go to Settings -> Storage -> Add Drive.

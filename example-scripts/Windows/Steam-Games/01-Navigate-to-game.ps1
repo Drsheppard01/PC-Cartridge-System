@@ -1,7 +1,6 @@
 # Put this script on your SSD at root level and name it "launch.ps1".
-#
-# This script automatically detects the game on this storage device
-# and navigates to the game's page on Steam.
+
+#### This script will automatically detects the game on this storage device and navigate to the game's page on Steam. ####
 # Meant for single game cartridges.
 
 $ErrorActionPreference = "Stop"
