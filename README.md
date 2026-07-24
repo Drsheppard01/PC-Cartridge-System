@@ -4,6 +4,10 @@ This project is a hobby experiment and is not an official Steam product.
 
 Automatic launching depends on your operating system settings and security policies. Some systems may require additional configuration for automounting drives or allowing scripts to run automatically.
 
+**Although there is a safe guard feature to auto-launch only trusted scripts, it still IS a security risk. Anyone with physical access to your PC *could* plug in a drive with a script on it, find the project folder and put their script to the trusted list. But at that point they could just execute their script already.<br>**
+
+**Use this at your own risk**
+
 
 
 
@@ -140,7 +144,7 @@ Example cartridge:<br>
 SSD<br>
 └── launch.sh<br>
 └── SteamLibrary<br>
-The contents of `launch.sh` decide what happens next.
+The content of `launch.sh` decide what happens next.
 
 ---
 
@@ -161,4 +165,4 @@ Example cartridge:<br>
 SSD<br>
 └── launch.ps1<br>
 └── SteamLibrary<br>
-The contents of `launch.ps1` decide what happens next.
+The content of `launch.ps1` decide what happens next.
