@@ -18,31 +18,37 @@ exec > >(tee "$LOG_FILE") 2>&1
 # Find Game IDs
 # ------------------------------------------
 
-# Find compatdata directory first
-COMPATDATA_DIR=$(find "$ROOT" -type d -name "compatdata" -print -quit)
+# Find steamapps directory first
+STEAMAPPS_DIR=$(find "$ROOT" -type d -name "steamapps" -print -quit)
 
-if [ -z "$COMPATDATA_DIR" ]; then
-    echo "ERROR: No compatdata directory found"
+if [ -z "$STEAMAPPS_DIR" ]; then
+    echo "ERROR: No steamapps directory found"
     exit 1
 fi
 
-echo "Comapatdata directory: $COMPATDATA_DIR"
+echo "Steamapps directory: $STEAMAPPS_DIR"
 
-# Search for all game folders inside compatdata and randomly pick one
-GAME_DIRS=()
 
-while IFS= read -r dir; do
-    GAME_DIRS+=("$dir")
-done < <(find "$COMPATDATA_DIR" -mindepth 1 -maxdepth 1 -type d)
+# Search for all appmanifest files inside steamapps
+GAMES=()
 
-if [ "${#GAME_DIRS[@]}" -eq 0 ]; then
-    echo "ERROR: No game folders inside compatdata"
+while IFS= read -r file; do
+    GAMES+=("$file")
+done < <(find "$STEAMAPPS_DIR" -maxdepth 1 -type f -name "appmanifest_*.acf")
+
+if [ "${#GAMES[@]}" -eq 0 ]; then
+    echo "ERROR: No appmanifest files inside steamapps"
     exit 1
 fi
 
-# Extract Game IDs from the game directories
-for GAME_DIR in "${GAME_DIRS[@]}"; do
-    GAME_ID=$(basename "$GAME_DIR")
+echo "Found ${#GAMES[@]} game(s) inside steamapps"
+
+
+# Extract Game IDs from the appmanifest files
+GAME_IDS=()
+
+for GAME in "${GAMES[@]}"; do
+    GAME_ID=$(basename "$GAME" | sed -E 's/appmanifest_([0-9]+)\.acf/\1/')
     GAME_IDS+=("$GAME_ID")
     echo "Found game: $GAME_ID"
 done

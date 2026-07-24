@@ -17,32 +17,38 @@ exec > >(tee "$LOG_FILE") 2>&1
 # Find Game ID
 # ------------------------------------------
 
-# Find compatdata directory first
-COMPATDATA_DIR=$(find "$ROOT" -type d -name "compatdata" -print -quit)
+# Find steamapps directory first
+STEAMAPPS_DIR=$(find "$ROOT" -type d -name "steamapps" -print -quit)
 
-if [ -z "$COMPATDATA_DIR" ]; then
-    echo "ERROR: No compatdata directory found"
+if [ -z "$STEAMAPPS_DIR" ]; then
+    echo "ERROR: No steamapps directory found"
     exit 1
 fi
 
-echo "Comapatdata directory: $COMPATDATA_DIR"
+echo "Steamapps directory: $STEAMAPPS_DIR"
 
-# Take the folder name of the first folder inside compatdata as the game ID
-GAMEID_DIR=$(find "$COMPATDATA_DIR" \
-    -mindepth 1 \
+# Find appmanifest file
+GAME=$(find "$STEAMAPPS_DIR" \
     -maxdepth 1 \
-    -type d \
-    -print -quit)
+    -type f \
+    -name "appmanifest_*.acf")
 
-if [ -z "$GAMEID_DIR" ]; then
-    echo "ERROR: No game folder inside compatdata"
+GAME_COUNT=$(echo "$GAME" | grep -c "appmanifest_")
+
+if [ "$GAME_COUNT" -eq 0 ]; then
+    echo "ERROR: No appmanifest files inside steamapps"
     exit 1
 fi
 
-echo "Game folder: $GAMEID_DIR"
+if [ "$GAME_COUNT" -gt 1 ]; then
+    echo "ERROR: More than one game found inside steamapps. Use other scripts instead."
+    exit 1
+fi
 
-# Removes the path to the compatdata folder, leaving only the game ID
-GAME_ID=$(basename "$GAMEID_DIR")
+
+# Extract Game ID from filename
+GAME_ID=$(basename "$GAME" | sed -E 's/appmanifest_([0-9]+)\.acf/\1/')
+
 echo "Found Game ID: $GAME_ID"
 
 # Navigate to game's page
