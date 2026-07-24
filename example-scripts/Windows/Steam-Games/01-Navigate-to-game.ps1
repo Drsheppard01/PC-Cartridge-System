@@ -20,33 +20,41 @@ try {
     # Find Game ID
     # ------------------------------------------
 
-    # Find compatdata directory first
-    $COMPATDATA_DIR = Get-ChildItem -Path $ROOT -Directory -Recurse |
-        Where-Object { $_.Name -eq "compatdata" } |
+    # Find steamapps directory first
+    $STEAMAPPS_DIR = Get-ChildItem -Path $ROOT -Directory -Recurse |
+        Where-Object { $_.Name -eq "steamapps" } |
         Select-Object -First 1
 
-    if (-not $COMPATDATA_DIR) {
-        Write-Host "ERROR: No compatdata directory found"
+    if (-not $STEAMAPPS_DIR) {
+        Write-Host "ERROR: No steamapps directory found"
         exit 1
     }
 
-    Write-Host "Compatdata directory: $($COMPATDATA_DIR.FullName)"
+    Write-Host "Steamapps directory: $($STEAMAPPS_DIR.FullName)"
 
+    # Search for all appmanifest files inside steamapps
+    $GAME = @(Get-ChildItem `
+        -Path $STEAMAPPS_DIR.FullName `
+        -Filter "appmanifest_*.acf" `
+        -File)
 
-    # Take the folder name of the first folder inside compatdata as the game ID
-    $GAMEID_DIR = Get-ChildItem -Path $COMPATDATA_DIR.FullName -Directory |
-        Select-Object -First 1
-
-    if (-not $GAMEID_DIR) {
-        Write-Host "ERROR: No game folder inside compatdata"
+    if ($GAME.Count -eq 0) {
+        Write-Host "ERROR: No appmanifest files inside steamapps"
+        exit 1
+    }
+    if ($GAME.Count -gt 1) {
+        Write-Host "ERROR: More than one game found inside steamapps. Use other scripts instead."
         exit 1
     }
 
-    Write-Host "Game folder: $($GAMEID_DIR.FullName)"
-
-
-    # Removes the path, leaving only the game ID
-    $GAME_ID = $GAMEID_DIR.Name
+    # Extract the Game ID from the filename
+    if ($GAME.BaseName -match '^appmanifest_(\d+)$') {
+        $GAME_ID = $Matches[1]
+    }
+    else {
+        Write-Host "ERROR: Invalid appmanifest filename: $($GAME.Name)"
+        exit 1
+    }
 
     Write-Host "Found Game ID: $GAME_ID"
 

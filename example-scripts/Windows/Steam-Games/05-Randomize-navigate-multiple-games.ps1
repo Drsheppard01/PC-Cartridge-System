@@ -20,42 +20,47 @@ try {
     # Find Game ID
     # ------------------------------------------
 
-    # Find compatdata directory first
-    $COMPATDATA_DIR = Get-ChildItem -Path $ROOT -Directory -Recurse |
-        Where-Object { $_.Name -eq "compatdata" } |
+    # Find steamapps directory first
+    $STEAMAPPS_DIR = Get-ChildItem -Path $ROOT -Directory -Recurse |
+        Where-Object { $_.Name -eq "steamapps" } |
         Select-Object -First 1
 
-    if (-not $COMPATDATA_DIR) {
-        Write-Host "ERROR: No compatdata directory found"
+    if (-not $STEAMAPPS_DIR) {
+        Write-Host "ERROR: No steamapps directory found"
         exit 1
     }
 
-    Write-Host "Compatdata directory: $($COMPATDATA_DIR.FullName)"
+    Write-Host "Steamapps directory: $($STEAMAPPS_DIR.FullName)"
 
-    $COMPATDATA_PATH = $COMPATDATA_DIR.FullName
-    # Search for all game folders inside compatdata
-    $GAME_DIRS = Get-ChildItem `
-        -Path $COMPATDATA_PATH `
-        -Directory
+    # Search for all appmanifest files inside steamapps
+    $GAMES = @(Get-ChildItem `
+        -Path $STEAMAPPS_DIR.FullName `
+        -Filter "appmanifest_*.acf" `
+        -File)
 
-
-    if ($GAME_DIRS.Count -eq 0) {
-        Write-Host "ERROR: No game folders inside compatdata"
+    if ($GAMES.Count -eq 0) {
+        Write-Host "ERROR: No appmanifest files inside steamapps"
         exit 1
     }
 
-    Write-Host "Found $($GAME_DIRS.Count) game(s) inside compatdata"
+    Write-Host "Found $($GAMES.Count) game(s) inside steamapps"
 
 
     # ------------------------------------------
     # Randomly pick one game folder
     # ------------------------------------------
 
-    $INDEX = Get-Random -Minimum 0 -Maximum $GAME_DIRS.Count
-    $GAMEID_DIR = $GAME_DIRS[$INDEX]
+    # Randomly pick one game
+    $GAME = Get-Random -InputObject $GAMES
 
-    # Removes the path, leaving only the game ID
-    $GAME_ID = $GAMEID_DIR.Name
+    # Extract the Game ID from the filename
+    if ($GAME.BaseName -match '^appmanifest_(\d+)$') {
+        $GAME_ID = $Matches[1]
+    }
+    else {
+        Write-Host "ERROR: Invalid appmanifest filename: $($GAME.Name)"
+        exit 1
+    }
 
     Write-Host "Selected Game ID: $GAME_ID"
 
