@@ -32,7 +32,7 @@ try {
 
     Write-Host "Compatdata directory: $($COMPATDATA_DIR.FullName)"
 
-
+    $COMPATDATA_PATH = $COMPATDATA_DIR.FullName
     # Search for all game folders inside compatdata
     $GAME_DIRS = Get-ChildItem `
         -Path $COMPATDATA_PATH `
