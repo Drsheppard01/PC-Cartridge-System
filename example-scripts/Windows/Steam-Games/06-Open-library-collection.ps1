@@ -181,13 +181,13 @@ try {
 
             $NAME = ""
 
-            if ($DATA -match '"name":"([^"]*)"') {
+            if ($DATA -match '\\"name\\":\\"([^"]*)\\"') {
                 $NAME = $matches[1]
             }
 
             $GAMES = ""
 
-            if ($DATA -match '"added":\[([^\]]*)\]') {
+            if ($DATA -match '\\"added\\":\[([^\]]*)\]') {
                 $GAMES = $matches[1]
             }
 
