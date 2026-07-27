@@ -23,14 +23,14 @@ while true; do
     FOUND_MOUNT=""
 
     while read -r DEVICE MOUNTPOINT; do
-
+        # converts the mountpoint to a proper path in case it contains escape sequences
+        MOUNTPOINT=$(printf '%b' "$MOUNTPOINT")
         if [ -f "$MOUNTPOINT/launch.sh" ]; then
             FOUND_SCRIPT="$MOUNTPOINT/launch.sh"
             FOUND_DEVICE="$DEVICE"
             FOUND_MOUNT="$MOUNTPOINT"
             break
         fi
-
     done < <(findmnt -rn -o SOURCE,TARGET)
 
 
