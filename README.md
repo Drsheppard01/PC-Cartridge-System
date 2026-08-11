@@ -1,15 +1,17 @@
-# Disclaimer
+# Fork Differences
 
-This project is a hobby experiment and is not an official Steam product.
+Trying to make scripts for Linux more portable
 
-Automatic launching depends on your operating system settings and security policies. Some systems may require additional configuration for automounting drives or allowing scripts to run automatically.
+TODO:
 
-**Although there is a safe guard feature to auto-launch only trusted scripts, it still IS a security risk. Anyone with physical access to your PC *could* plug in a drive with a script on it, find the project folder and put their script to the trusted list. But at that point they could just execute their script already.<br>**
-
-**Use this at your own risk**
-
-
-
+- [ ] Ported to POSIX shell. Want tests with:
+ - [ ] Zsh
+ - [ ] ash
+- [ ] Add support for non-systemd
+ - [ ] Dinit
+ - [ ] Runit
+ - [ ] OpenRC
+ - [ ] maybe your init, if you share tests results
 
 # PC Cartridge System
 
